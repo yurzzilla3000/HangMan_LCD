@@ -6,10 +6,7 @@ bool screen = 0;
 byte selected = 0;
 LiquidCrystal_I2C lcd(0x27,16,2);
 char letters[26] = "abcdefghijklmnopqrstuvwxyz";
-<<<<<<< HEAD
-void printWord();
 void printLetters(){
-=======
 const char* words[] = {"hello\0","cool\0", "frog\0", "idk\0"};
 // char PlayWord[32] = words[random(0,3)];
 void printWord(){
@@ -21,15 +18,13 @@ void printWord(){
   //   if(i == 15) lcd.setCursor(0,1);
   // }
 }
-void printLetters(byte selected){
->>>>>>> 26250d9aab4c9193d69eaca7d7a0d927da759084
+void printLetters(){
   for(int i = 0;i < 26;i++){
     lcd.print(letters[i]);
     if(i == 15) lcd.setCursor(0,1);
   }
   lcd.setCursor(selected % 16, selected/16);
 }
-<<<<<<< HEAD
 void handleInput(){
     if(digitalRead(PIN_NEXT)){
       if(digitalRead(PIN_PREV)){
@@ -49,11 +44,6 @@ void handleInput(){
     }
 }
 const char* words[] = {"hello","cool", "cool", "idk"};
-=======
-void handleInput();
-bool screen = 1;
-char curr_position = 0;
->>>>>>> 26250d9aab4c9193d69eaca7d7a0d927da759084
 void setup() {
   randomSeed(analogRead(A0));
   lcd.init();
