@@ -2,25 +2,36 @@
 #define PIN_NEXT 4
 #define PIN_PREV 2
 #define PIN_SEL 3
-
+bool screen = 0;
+byte selected = 0;
 LiquidCrystal_I2C lcd(0x27,16,2);
 char letters[26] = "abcdefghijklmnopqrstuvwxyz";
 void printWord();
-void printLetters(byte selected){
+void printLetters(){
   for(int i = 0;i < 26;i++){
     lcd.print(letters[i]);
     if(i == 15) lcd.setCursor(0,1);
   }
   lcd.setCursor(selected % 16, selected/16);
-
 }
 void handleInput(){
     if(digitalRead(PIN_NEXT)){
-      if(digitalRead())
+      if(digitalRead(PIN_PREV)){
+        screen = !screen;
+      }
+      else{
+        selected++;
+        selected %= 26;;
+      }
+    }
+    else if(digitalRead(PIN_PREV)){
+      selected--;
+      if(selected < 0) selected = 25;
+    }
+    else if(digitalRead(PIN_SEL)){
+      //placeholder
     }
 }
-bool screen = 0;
-char curr_position = 0;
 const char* words[] = {"hello","cool", "cool", "idk"};
 void setup() {
   lcd.init();
@@ -32,11 +43,12 @@ void setup() {
 }
 void loop() {
   lcd.clear();
+  handleInput();
   if(screen){
-    printLetters(23);
+    printLetters();
   }
   else{
-    printWord();
+    //printWord();
   }
 
   delay(1000);
