@@ -5,6 +5,7 @@ extern bool screen;
 extern byte lives;
 extern const char* PlayWord;
 extern char letters[26];
+extern char letters_guessed[26];
 static unsigned long lastMove = 0;
 #define VRX A6
 #define VRY A7
@@ -61,9 +62,12 @@ bool handleInput() {
     return 1;
   }
   if((lives == 0 && !digitalRead(SWSCREEN)) || (is_full_guessed && !digitalRead(SWSCREEN)) ){
-    screen = 1;
+    screen = 0;
     is_full_guessed = false;
-    letters[26] = "abcdefghijklmnopqrstuvwxyz";
+    for(int i = 0; i<26; i++){
+      letters[i] = 'a' + i;
+      letters_guessed[i] = " ";
+    }
     lives = 9;
     PlayWord = words[random(0,4)];
   }

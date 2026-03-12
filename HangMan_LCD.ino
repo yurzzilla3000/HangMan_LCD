@@ -31,19 +31,17 @@ void setup() {
 
 void loop() {
   if(lives){    
-    if(is_full_guessed == true){
-      lcd.clear();
-      lcd.print("You Win!");
-      delay(1000)
-    }else{
-      if(screen){
-        printLetters();
-      }
-      else{
-        printWord();
+    if(screen){
+      printLetters();
+    }
+    else{
+      printWord();
+      if(is_full_guessed == true){
+        lcd.clear();
+        lcd.print("You Win!");
+        delay(1000);
       }
     }
-    
   }else{
     lcd.clear();
     lcd.print("Game Over!");
