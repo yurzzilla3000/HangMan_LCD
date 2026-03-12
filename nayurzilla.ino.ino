@@ -2,6 +2,8 @@
 extern LiquidCrystal_I2C lcd;
 extern const char* PlayWord;
 extern char letters_guessed[26];
+extern bool screen;
+extern bool is_full_guessed;
 void printWord(){
   lcd.clear();
   for(int i = 0; i < 31; i++){
@@ -16,15 +18,21 @@ void printWord(){
         break;
       }
     }
-    if(guessed) lcd.print(PlayWord[i]);
-    else lcd.print("_");
-    
+    if(guessed) {
+      lcd.print(PlayWord[i]);
+      is_full_guessed = true;
+      }
+    else{ 
+      lcd.print("_");
+      is_full_guessed = false;
+    }
   }
 }
-void guess_letter(int id){
+void guess_letter(char id){
   bool found = false;
+  char letter_s = id+97;
     for(int i = 0; i < 31; i++){
-      if(PlayWord[i] == id){
+      if(PlayWord[i] == letter_s){
         letters_guessed[count_guessed] = letters[id];
         count_guessed += 1;
         Serial.println(letters_guessed);
@@ -33,5 +41,7 @@ void guess_letter(int id){
       if(PlayWord[i] == '\0') break;
       
     }
-   if(!found) lives--; 
+  letters[id] = " ";
+  if(!found) lives--; 
+  screen = 0;
   }
