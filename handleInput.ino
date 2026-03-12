@@ -1,6 +1,7 @@
 #pragma once
 
 extern Cursor selected;
+extern bool screen;
 static unsigned long lastMove = 0;
 #define VRX A6
 #define VRY A7
@@ -42,14 +43,17 @@ bool handleInput() {
       return 1;
     }
   }
-  else if(!digitalRead(SW)){
+  else if(!digitalRead(SW) && screen){
+    //
     Serial.println("Sent letter");
+    //placeholder
     lastMove = millis();
+    return 1;
   }
   else if(!digitalRead(SWSCREEN)){
-    Serial.println("Switched screen");
+    screen = !screen;
     lastMove = millis();
+    return 1;
   }
-
   return 0;
 }
