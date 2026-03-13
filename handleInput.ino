@@ -15,7 +15,7 @@ static unsigned long lastMove = 0;
 #define UPPER_BOUND 700
 #define LOWER_BOUND 300
 
-#define MOVE_DELAY 200
+#define MOVE_DELAY 150
 
 bool handleInput() {
 
@@ -49,9 +49,10 @@ bool handleInput() {
   }
   else if(!digitalRead(SW) && screen){
     //
-    char letter_s = selected.y*15 + selected.x;
-    Serial.println((char)(letter_s+97));
+    char letter_s = selected.y*16 + selected.x;
+    if(letter_s >= 0 && letter_s < 26 && letters[letter_s] != ' '){
     guess_letter(letter_s);
+    }
     //placeholder
     lastMove = millis();
     return 1;

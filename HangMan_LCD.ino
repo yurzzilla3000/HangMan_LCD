@@ -16,13 +16,12 @@ char letters_guessed[26] = "                          ";
 byte length;
 byte count_guessed = 0;
 void setup() {
-  pinMode(2, INPUT);
+  pinMode(5, INPUT);
   pinMode(3, INPUT_PULLUP);
   pinMode(A4, OUTPUT);
   pinMode(A5, OUTPUT);
-  pinMode(A6, OUTPUT);  
-  pinMode(A7, OUTPUT);  
-  Serial.begin(9600);
+  pinMode(A6, INPUT);  
+  pinMode(A7, INPUT);  
   randomSeed(analogRead(0));
   lcd.init();
   lcd.backlight();
@@ -47,5 +46,4 @@ void loop() {
     lcd.print("Game Over!");
   }
   while(!handleInput());
-  delay(50);
 }

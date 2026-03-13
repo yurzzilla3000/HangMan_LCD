@@ -6,6 +6,7 @@ extern bool screen;
 extern bool is_full_guessed;
 void printWord(){
   lcd.clear();
+  lcd.noCursor();
   for(int i = 0; i < 31; i++){
     bool guessed = false;
     if(i == 16) lcd.setCursor(0,1);

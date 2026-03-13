@@ -5,6 +5,7 @@ void printLetters(){
     lcd.print(letters[i]);
     if(i == 15) lcd.setCursor(0,1);
   }
+  lcd.cursor();
   lcd.print(" ");
   lcd.print(lives);
   lcd.setCursor(selected.x, selected.y);
